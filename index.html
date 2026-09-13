@@ -215,70 +215,41 @@
 
       .hero-card {
         background: linear-gradient(160deg, #4e401d, #80651b);
-        border-radius: 28px;
+        border-radius: 30px;
         padding: 22px;
         color: #fff;
         box-shadow: var(--shadow);
       }
 
-      .image-box {
-        background: linear-gradient(160deg, #ffe58a 0%, #fff8dc 30%, #fff0b0 100%);
-        border-radius: 22px;
-        min-height: 420px;
+      .hero-slider {
         position: relative;
-        overflow: hidden;
-      }
-
-      .garment {
-        position: absolute;
-        inset: auto auto 22px 22px;
-        width: 180px;
-        height: 220px;
-        background: linear-gradient(135deg, #ffe082, #ffb300);
-        border-radius: 24px 24px 50px 50px;
-        transform: rotate(-12deg);
-        box-shadow: 0 28px 35px rgba(104, 74, 12, 0.16);
-      }
-
-      .garment::before,
-      .garment::after {
-        content: "";
-        position: absolute;
-      }
-
-      .garment::before {
-        width: 44px;
-        height: 120px;
-        background: rgba(255, 255, 255, 0.8);
-        left: 68px;
-        top: -16px;
-        border-radius: 18px;
-      }
-
-      .garment::after {
         width: 100%;
-        height: 22px;
-        background: rgba(255, 255, 255, 0.72);
-        left: 0;
-        bottom: 42px;
+        aspect-ratio: 1.55 / 1;
+        max-height: 520px;
+        border-radius: 22px;
+        overflow: hidden;
+        background: #f2e7c8;
       }
 
-      .floating-card {
+      .slide {
         position: absolute;
-        right: 18px;
-        bottom: 18px;
-        padding: 16px 18px;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 18px;
-        color: var(--text);
-        box-shadow: var(--shadow);
-        width: min(220px, 70%);
+        inset: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.7s ease, visibility 0.7s ease;
       }
 
-      .floating-card strong {
+      .slide.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
         display: block;
-        font-size: 1.3rem;
-        margin-top: 6px;
+        background: #f5f1e8;
       }
 
       .section {
@@ -519,19 +490,26 @@
       }
 
       .booking-shell {
-        background: linear-gradient(135deg, #40351e, #66501a 53%, #876b1e);
+        background: linear-gradient(135deg, #241e13 0%, #43361a 38%, #7a5d1c 100%);
         border-radius: 30px;
         color: #fff;
         padding: clamp(28px, 3vw, 42px);
         display: grid;
         grid-template-columns: 0.9fr 1.1fr;
         gap: 24px;
-        box-shadow: var(--shadow);
+        box-shadow: 0 22px 50px rgba(31, 23, 8, 0.28);
+      }
+
+      .booking-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       .booking-copy h3 {
         margin: 0 0 12px;
         font-size: clamp(1.9rem, 3vw, 2.8rem);
+        letter-spacing: 0.04em;
       }
 
       .booking-copy p {
@@ -539,9 +517,53 @@
         color: rgba(255, 255, 255, 0.82);
       }
 
+      .booking-meta {
+        display: grid;
+        gap: 14px;
+      }
+
+      .booking-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .booking-phone {
+        display: inline-block;
+        color: #fff7d8;
+        font-size: clamp(2rem, 3vw, 3.1rem);
+        line-height: 1.05;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-shadow: 0 10px 28px rgba(255, 210, 93, 0.25);
+      }
+
+      .booking-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 4px;
+      }
+
+      .booking-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 32px;
+        padding: 0 12px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #fff;
+      }
+
       .mini-list {
         display: grid;
         gap: 14px;
+        margin-top: 18px;
       }
 
       .mini-list div {
@@ -707,7 +729,6 @@
         <small>Работаем ежедневно с 9:00 до 21:00</small>
         <div class="contacts">
           <small>☎ +7(924)702-65-77</small>
-          <small>✉ info@chistka-service.ru</small>
         </div>
       </div>
     </div>
@@ -722,7 +743,6 @@
           <a href="#services">Услуги</a>
           <a href="#prices">Цены</a>
           <a href="#booking">Запись</a>
-          <a href="#contacts">Контакты</a>
         </nav>
         <a class="btn btn-primary" href="#booking">Записаться</a>
       </div>
@@ -752,13 +772,16 @@
           </div>
 
           <div class="hero-card">
-            <div class="image-box" aria-label="Пример чистки одежды">
-              <div class="garment"></div>
-              <div class="floating-card">
-                <small>Лучший выбор</small>
-                <strong>Скидка 10%</strong>
-                на первый заказ
-              </div>
+            <div class="hero-slider" aria-label="Примеры работ">
+              <div class="slide active"><img src="images/ysygi/страница_2.png" alt="Пример работы 1" /></div>
+              <div class="slide"><img src="images/ysygi/страница_3.png" alt="Пример работы 2" /></div>
+              <div class="slide"><img src="images/ysygi/страница_4.png" alt="Пример работы 3" /></div>
+              <div class="slide"><img src="images/ysygi/страница_5.png" alt="Пример работы 4" /></div>
+              <div class="slide"><img src="images/ysygi/страница_6.png" alt="Пример работы 5" /></div>
+              <div class="slide"><img src="images/ysygi/страница_7.png" alt="Пример работы 6" /></div>
+              <div class="slide"><img src="images/ysygi/страница_8.png" alt="Пример работы 7" /></div>
+              <div class="slide"><img src="images/ysygi/страница_9.png" alt="Пример работы 8" /></div>
+              <div class="slide"><img src="images/ysygi/страница_10.png" alt="Пример работы 9" /></div>
             </div>
           </div>
         </div>
@@ -775,18 +798,6 @@
           </div>
 
           <div class="services-grid">
-            <article class="card">
-              <div class="service-icon">🧥</div>
-              <h3>Верхняя одежда</h3>
-              <p>Пуховики, пальто, куртки и дубленки после сезона возвращаются в идеальный вид.</p>
-            </article>
-
-            <article class="card">
-              <div class="service-icon">👔</div>
-              <h3>Офисный гардероб</h3>
-              <p>Костюмы, плащи, рубашки и галстуки — для презентабельного образа каждый день.</p>
-            </article>
-
             <article class="card">
               <div class="service-icon">🛋️</div>
               <h3>Мебель и ковры</h3>
@@ -1011,49 +1022,22 @@
                 Оставьте заявку, и мы быстро подберем удобное время, сообщим
                 стоимость и поможем выбрать подходящий формат услуги.
               </p>
+
+              <div class="booking-meta">
+                <span class="booking-label">Позвонить или написать</span>
+                <a class="booking-phone" href="tel:+79247026577">+7 (924) 702-65-77</a>
+                <div class="booking-links">
+                  <a class="booking-link" href="https://t.me/phelki_38bratsk" target="_blank" rel="noreferrer">Telegram</a>
+                  <a class="booking-link" href="https://vk.ru/id772840925" target="_blank" rel="noreferrer">VK</a>
+                </div>
+              </div>
+
               <div class="mini-list">
                 <div><span class="dot"></span> Обработка без потери цвета и фактуры</div>
                 <div><span class="dot"></span> Точное выполнение по срокам</div>
                 <div><span class="dot"></span> Консультация по уходу после чистки</div>
               </div>
             </div>
-
-            <form action="#" method="post">
-              <div class="field-grid">
-                <div class="field">
-                  <label for="name">Ваше имя</label>
-                  <input id="name" type="text" placeholder="Иван" />
-                </div>
-
-                <div class="field">
-                  <label for="phone">Телефон</label>
-                  <input id="phone" type="tel" placeholder="+7 (___) ___-__-__" />
-                </div>
-
-                <div class="field">
-                  <label for="service">Услуга</label>
-                  <select id="service">
-                    <option>Верхняя одежда</option>
-                    <option>Офисный гардероб</option>
-                    <option>Мебель и ковры</option>
-                    <option>Шторы и текстиль</option>
-                    <option>Деликатная чистка</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label for="date">Дата</label>
-                  <input id="date" type="date" />
-                </div>
-
-                <div class="field full">
-                  <label for="comment">Комментарий</label>
-                  <textarea id="comment" placeholder="Напишите, что нужно почистить, есть ли сложные пятна или деликатные ткани"></textarea>
-                </div>
-              </div>
-
-              <button class="btn btn-primary" type="submit">Отправить заявку</button>
-            </form>
           </div>
         </div>
       </section>
@@ -1087,38 +1071,6 @@
         </div>
       </section>
 
-      <section class="section" id="contacts">
-        <div class="container">
-          <div class="section-head">
-            <h2>Контакты</h2>
-            <p>Пишите, звоните или приезжайте в удобное время — мы поможем быстро и без стресса.</p>
-          </div>
-
-          <div class="contacts-grid">
-            <article class="card contact-card">
-              <h3>Телефон</h3>
-              <ul class="contact-list">
-                <li>☎ +7(924)702-65-77</li>
-              </ul>
-            </article>
-
-            <article class="card contact-card">
-              <h3>Telegram</h3>
-              <ul class="contact-list">
-                <a href="https://t.me/phelki_38bratsk">Telegram канал пчелок</a></li>
-              </ul>
-            </article>
-
-            <article class="card contact-card">
-              <h3>Почта</h3>
-              <ul class="contact-list">
-                <li>✉ info@chistka-service.ru</li>
-                <li>💬 Ответ в течение 15 минут</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
     </main>
 
     <footer class="footer">
@@ -1151,6 +1103,20 @@
       });
 
       setPriceTab('furniture');
+
+      const slides = document.querySelectorAll('.slide');
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+      }
+
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }, 3000);
     </script>
   </body>
 </html>
