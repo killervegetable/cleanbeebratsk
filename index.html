@@ -853,13 +853,13 @@
       <section class="hero">
         <div class="container hero-inner">
           <div>
-            <div class="eyebrow">ПРОФЕССИОНАЛЬНЫЕ УСЛУГИ КЛИНИНГА И ХИМЧИСТКИ</div>
-            <h1>Химчистка мебели и ковров в Братске</h1>
+            <div class="eyebrow">КЛИНИНГ-УСЛУГИ — ЭТО ПРЕЖДЕ ВСЕГО ПРОФЕССИОНАЛЬНЫЙ УХОД</div>
+            <h1>Клининг и химчистка в Братске</h1>
             <p class="lead">
-              Пчёлки Клининг — это профессиональная химчистка мебели, ковров, матрасов и текстиля в Братске. Мы делаем глубокую очистку без повреждения ткани, сохраняя свежесть, цвет и комфорт вещей.
+              Пчёлки Клининг — это профессиональный клининг помещений, а так же химчистка текстиля в Братске.
             </p>
             <p class="lead">
-              Услуги клининга и химчистки подходят для квартир, домов, офисов и коммерческих помещений. Подберём безопасный способ очистки под ваш тип ткани и степень загрязнения.
+              Для нас клининг-услуги — это прежде всего качественный сервис, безопасные средства и внимательный подход к каждому объекту. Подберём оптимальный способ очистки под ваш тип ткани, материал и степень загрязнения.
             </p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#booking">Записаться онлайн</a>
@@ -899,6 +899,12 @@
 
           <div class="services-grid">
             <article class="card">
+              <div class="service-icon">🧽</div>
+              <h3>Химчистка</h3>
+              <p>Профессиональная чистка мягкой мебели, ковров, матрасов и текстиля с безопасными средствами.</p>
+            </article>
+
+            <article class="card">
               <div class="service-icon">🛋️</div>
               <h3>Мебель и ковры</h3>
               <p>Глубокая чистка диванов, кресел, ковров и мягких покрытий без запаха и влаги.</p>
@@ -921,6 +927,12 @@
               <h3>Удаление пятен</h3>
               <p>Комплексная обработка сложных загрязнений: вино, кофе, масла, следы и запахи.</p>
             </article>
+
+            <article class="card">
+              <div class="service-icon">🏠</div>
+              <h3>Генеральная уборка</h3>
+              <p>Полная очистка квартиры, офиса или дома: комнаты, кухни, санузлы, окна и труднодоступные зоны.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -931,15 +943,15 @@
             <div class="price-sheet-title">Прайс лист</div>
 
             <div class="price-switcher" role="tablist" aria-label="Вкладки прайса">
-              <button class="price-toggle is-active" type="button" data-target="furniture" aria-selected="true">
-                Химчистка мебели и ковров
-              </button>
-              <button class="price-toggle" type="button" data-target="extra" aria-selected="false">
+              <button class="price-toggle is-active" type="button" data-target="extra" aria-selected="true">
                 Услуги клининга
+              </button>
+              <button class="price-toggle" type="button" data-target="furniture" aria-selected="false">
+                Химчистка мебели и ковров
               </button>
             </div>
 
-            <div class="price-panel is-active" id="furniture-panel">
+            <div class="price-panel" id="furniture-panel">
               <div class="price-row">
                 <div class="name">Диван детский</div>
                 <div class="price">5 000 ₽</div>
@@ -1277,7 +1289,7 @@
         toggle.addEventListener('click', () => setPriceTab(toggle.dataset.target));
       });
 
-      setPriceTab('furniture');
+      setPriceTab('extra');
 
       const slides = document.querySelectorAll('.slide');
       let currentSlide = 0;
